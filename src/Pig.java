@@ -26,38 +26,32 @@ public class Pig {
 
     // Implement your solution here!
     public static String pigLatin(String sentence) {
-        //create empty string builder to hold result 
-        // get sentence using sentence.split(" ")
-        String [] words = sentence.split(" ");
-        String result = "";
+        String [] words = sentence.split(" "); //splits input by spaces
+        String result = ""; //create empty string builder to hold result 
         // for each word in sentence array
-        // add space to result string builder
-        for (String checkedWord : words){
-            result += changedWord(checkedWord);
+        for(String word : words){
+            result += helper(word);
             result += " ";
         }
-        // REMOVE THE SPACE AT THE END 
-        result = result.substring(0, result.length() - 1);
-
-        return result;
-    }
-
+    // REMOVE THE SPACE AT THE END 
+    result = result.substring(0, result.length() - 1);
+    return result;
+    
+    } 
     // -------- FOR SELF... FOCUS ON SUPPORT METHODS -------- 
     //firstLetter = word.charAt(0)
     // if firstLetter ===> a,e,i,o,u then add word to result string builder
     // else restOfWord = word.substring(1)
     // then convert to pig latin by doing
     // Append (restOfWord + firstLetter + "ay") to result string builder
-    private static String changedWord(String word) {
-        if (word.charAt(0) == 'a' || word.charAt(0) == 'e' || word.charAt(0) ==  'o' || word.charAt(0) == 'i' || word.charAt(0) ==  'o' || word.charAt(0) ==  'u'){
-            return word;
+    private static String helper (String word) {
+        if (word.charAt(0) == 'a'|| word.charAt(0) == 'e' ||word.charAt(0) == 'i' || word.charAt(0) == 'o' || word.charAt(0) == 'u') {
+        return word;    
         }
         char firstLetter = word.charAt(0);
-        word = word.substring(1);
-        word = word + firstLetter;
-        return word + "ay"; 
+        word = word.substring(1) + firstLetter;
+        return word + "ay";
     }
-    
     
     
     // Method to help with testing, you do not need to read this.
