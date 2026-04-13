@@ -49,7 +49,7 @@ public class Pig {
         if (word.isEmpty()) return "";
 
         char first = word.charAt(0);
-        if ("aeiou".indexOf(first)!= -1){ //if the first letter of the word we are checking is in the string 'aeiou' then return word
+        if ("aeiou".indexOf(first)!= -1){ //if the first letter of the word we are checking is not in the string 'aeiou' then return word
             return word; // -1 means character not found 
         }
         return word.substring(1) + first + "ay";
