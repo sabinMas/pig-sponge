@@ -25,34 +25,35 @@ public class Pig {
     }
 
     // Implement your solution here!
+    // Cracking the Coding Interview Notes
+    // Big O notation this would be O(n) where n = sentence length
+    // using StringBuilder (O(n)) rather than result += (O(n^2))
+    // helperMethod should be constant O(1) time
+
     public static String pigLatin(String sentence) {
-        String [] words = sentence.split(" "); //splits input by spaces
-        String result = ""; //create empty string builder to hold result 
-        // for each word in sentence array
-        for(String word : words){
-            result += helper(word);
-            result += " ";
+        String [] words = sentence.split(" "); //creates words array by using sentence 
+        StringBuilder result = new StringBuilder(""); //create empty string builder to hold result 
+        
+        for(int i = 0; i< words.length; i++) {  // for each word in sentence array, using i for spacing
+            result.append(helperMethod(words[i])); // adds the changed word from helper method to the string builder
+
+            if(i < words.length - 1) { //if not last word add a space
+                result.append(" "); 
+            }
         }
-    // REMOVE THE SPACE AT THE END 
-    result = result.substring(0, result.length() - 1);
-    return result;
-    
-    } 
-    // -------- FOR SELF... FOCUS ON SUPPORT METHODS -------- 
-    //firstLetter = word.charAt(0)
-    // if firstLetter ===> a,e,i,o,u then add word to result string builder
-    // else restOfWord = word.substring(1)
-    // then convert to pig latin by doing
-    // Append (restOfWord + firstLetter + "ay") to result string builder
-    private static String helper (String word) {
-        if (word.charAt(0) == 'a'|| word.charAt(0) == 'e' ||word.charAt(0) == 'i' || word.charAt(0) == 'o' || word.charAt(0) == 'u') {
-        return word;    
-        }
-        char firstLetter = word.charAt(0);
-        word = word.substring(1) + firstLetter;
-        return word + "ay";
+        return result.toString();
     }
-    
+    // first = word.charAt(0)
+    // if first ===> a,e,i,o,u then add word to result 
+    private static String helperMethod (String word) {
+        if (word.isEmpty()) return "";
+
+        char first = word.charAt(0);
+        if ("aeiou".indexOf(first)!= -1){ //if the first letter of the word we are checking is in the string 'aeiou' then return word
+            return word; // -1 means character not found 
+        }
+        return word.substring(1) + first + "ay";
+    }
     
     // Method to help with testing, you do not need to read this.
     public static void assertEqual(int testNumber, String actual, String expected) {
